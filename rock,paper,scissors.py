@@ -1,5 +1,4 @@
 import random
-import itertools
 
 rock = '''
     _______
@@ -68,5 +67,3 @@ elif user_choice == 2 and computer_choice == 1:
 else:
     print(tie)
     
-
-
