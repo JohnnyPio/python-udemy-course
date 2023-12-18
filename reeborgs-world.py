@@ -45,7 +45,7 @@ def hurdle():
 #        turn_right()
 #        move()
 
-#Maze
+#Maze - complex
 while at_goal() != True:
     if wall_in_front() and wall_on_right():
         turn_left()
@@ -56,6 +56,16 @@ while at_goal() != True:
         move()
     else: 
         move()
+
+# Maze - from Angela
+# while at_goal() != True: 
+#     if right_is_clear():
+#         turn_right()
+#         move()
+#     elif front_is_clear():
+#         move()
+#     else:
+#         turn_left()
 
 
     
