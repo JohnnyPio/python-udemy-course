@@ -18,24 +18,24 @@ def hurdle():
     move()
     turn_left()
     
-#Hurdle 1
+# Hurdle 1
 #for i in range(6):
 #    move()
 #    hurdle()
     
-#Hurdle 2
+# Hurdle 2
 #while at_goal() == False:
 #    move()
 #    hurdle()
 
-#Hurdle 3
+# Hurdle 3
 #while at_goal() != True:
 #    if front_is_clear() == True:
 #        move()
 #    else:
 #        hurdle()
 
-#Hurdle 4
+# Hurdle 4
 #while at_goal() != True:
 #    if wall_in_front() == True:
 #        turn_left()
@@ -45,16 +45,12 @@ def hurdle():
 #        turn_right()
 #        move()
 
-#Maze - complex
+# Maze - complex - cleaned up
 while at_goal() != True:
-    if wall_in_front() and wall_on_right():
-        turn_left()
-    elif not wall_in_front and wall_on_right():
-        move()
-    elif right_is_clear():
+    if right_is_clear():
         turn_right()
         move()
-    else: 
+    elif front_is_clear():
         move()
 
 # Maze - from Angela
