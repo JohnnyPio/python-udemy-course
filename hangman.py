@@ -1,6 +1,7 @@
 import random
 word_list = ["aardvark", "baboon", "camel"]
 chosen_word = random.choice(word_list)
+word_len = len(chosen_word)
 
 print(f"pssst, the solution is {chosen_word}")
 
@@ -9,7 +10,7 @@ print(f"pssst, the solution is {chosen_word}")
 #So if the chosen_word was "apple", display should be ["_", "_", "_", "_", "_"] with 5 "_" representing each letter to guess.
 display = []
 for char in chosen_word:
-    display.append("_")
+    display += "_"
 
 print(f"Your word is {display}")
 
@@ -19,7 +20,7 @@ guess = input("Guess a letter.").lower()
 #If the letter at that position matches 'guess' then reveal that letter in the display at that position.
 #e.g. If the user guessed "p" and the chosen word was "apple", then display should be ["_", "p", "p", "_", "_"].
 index = 0
-for position in range(len(chosen_word)):
+for position in range(word_len):
     letter = chosen_word[position]
     if letter == guess:
         display[position] = letter
