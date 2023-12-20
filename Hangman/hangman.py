@@ -3,7 +3,6 @@ import hangman_art
 import hangman_words
 import os
 
-
 # Variables
 chosen_word = random.choice(hangman_words.word_list)
 word_len = len(chosen_word)
@@ -16,7 +15,7 @@ def cls():
 
 #Testing code
 print(hangman_art.logo)
-print(f"pssst, the solution is {chosen_word}")
+#print(f"pssst, the solution is {chosen_word}")
 
 #Create blanks
 display = []
@@ -44,7 +43,7 @@ while not end_of_game:
         lives -= 1
         if lives == 0:
             end_of_game = True
-            print("You lose.")
+            print(f"You lose. The word was {chosen_word}")
 
     #Join all the elements in the list and turn it into a String.
     print(f"{' '.join(display)}")
