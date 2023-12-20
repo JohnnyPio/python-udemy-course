@@ -1,8 +1,7 @@
+import art
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
-text = input("Type your message:\n").lower()
-shift = int(input("Type the shift number:\n"))
+print(art.logo)
 
 def translate(direction_toggle, plain_text, shift_amount):
     new_text = ""
@@ -36,5 +35,13 @@ def translate(direction_toggle, plain_text, shift_amount):
         print("Please use encode or decode only!")
     print(f"The {direction_toggle}d text is {new_text}")
 
-
-translate(direction,text,shift)
+game_continuing = True
+while game_continuing == True:
+    direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+    text = input("Type your message:\n").lower()
+    shift = int(input("Type the shift number:\n"))
+    translate(direction,text,shift)
+    result = input("Type 'yes' if you want to play again, else type 'no'. \n")
+    if result == "no":
+        game_continuing = False
+        print("Goodbye.")
