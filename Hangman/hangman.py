@@ -1,15 +1,21 @@
 import random
 import hangman_art
 import hangman_words
+import os
+
 
 # Variables
-word_list = hangman_words.word_list
-chosen_word = random.choice(word_list)
+chosen_word = random.choice(hangman_words.word_list)
 word_len = len(chosen_word)
 end_of_game = False
 lives = 6
 
+# clear console
+def cls():
+    os.system('cls' if os.name=='nt' else 'clear')
+
 #Testing code
+print(hangman_art.logo)
 print(f"pssst, the solution is {chosen_word}")
 
 #Create blanks
@@ -21,6 +27,12 @@ for char in chosen_word:
 while not end_of_game:
     guess = input("Guess a letter. ").lower()
 
+    # clear console after each guess
+    cls()
+
+    if guess in display:
+        print(f"You've already guessed {guess}.")
+
     #Check guessed letter
     for position in range(word_len):
         letter = chosen_word[position]
@@ -28,6 +40,7 @@ while not end_of_game:
             display[position] = letter
     
     if guess not in chosen_word:
+        print(f"The letter {guess} is not in the chosen word.")
         lives -= 1
         if lives == 0:
             end_of_game = True
