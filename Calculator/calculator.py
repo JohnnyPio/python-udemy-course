@@ -34,6 +34,17 @@ operator = operations[operation_symbol]
 num2 = int(input("What's the second number?: "))
 
 #Do Math based on operator and numbers
-answer = operator(num1,num2)
+first_answer = operator(num1,num2)
 
-print(f"{num1} {operation_symbol} {num2} = {answer}")
+print(f"{num1} {operation_symbol} {num2} = {first_answer}")
+
+#### Next batch
+
+operation_symbol = input("Pick another operation: ")
+
+#Pick second num
+num3 = int(input("What's the next number?: "))
+operator = operations[operation_symbol]
+second_answer = operator(first_answer, num3)
+
+print(f"{first_answer} {operation_symbol} {num3} = {second_answer}")
