@@ -1,5 +1,6 @@
-#Calculator 
+from art import logo
 
+#Calculator 
 def add(n1, n2):
     return n1 + n2
 
@@ -19,32 +20,33 @@ operations = {
     "/": divide,
 }
 
-#Pick first num
-num1 = int(input("What's the first number?: "))
+def calculator():
+    print(logo)
+    #Pick first num
+    num1 = float(input("What's the first number?: "))
 
-#Pick operator
-for operators in operations:
-    print(operators)
-operation_symbol = input("Pick an operation from the line above: ")
+    #Pick operator
+    for operators in operations:
+        print(operators)
 
-#Get dictionary key
-operator = operations[operation_symbol]
+    should_continue = True
+    while should_continue:
+        operation_symbol = input("Pick an operation: ")
+        
+        #Get dictionary key
+        operator = operations[operation_symbol]
+        
+        #Pick next num
+        num2 = float(input("What's the next number?: "))
 
-#Pick second num
-num2 = int(input("What's the second number?: "))
+        #Do Math based on operator and numbers
+        answer = operator(num1,num2)
 
-#Do Math based on operator and numbers
-first_answer = operator(num1,num2)
+        print(f"{num1} {operation_symbol} {num2} = {answer}")
 
-print(f"{num1} {operation_symbol} {num2} = {first_answer}")
+        if input(f"Type 'y' to continue calculating with {answer}, or type 'n' to start a new calculation: ") == "y":
+            num1 = answer
+        else:
+            should_continue = False
 
-#### Next batch
-
-operation_symbol = input("Pick another operation: ")
-
-#Pick second num
-num3 = int(input("What's the next number?: "))
-operator = operations[operation_symbol]
-second_answer = operator(first_answer, num3)
-
-print(f"{first_answer} {operation_symbol} {num3} = {second_answer}")
+calculator()
