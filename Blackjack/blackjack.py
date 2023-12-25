@@ -1,3 +1,6 @@
+import random
+import os
+
 ############### Blackjack Project #####################
 
 #Difficulty Normal 😎: Use all Hints below to complete the project.
@@ -58,4 +61,59 @@
 #Hint 13: Create a function called compare() and pass in the user_score and computer_score. If the computer and user both have the same score, then it's a draw. If the computer has a blackjack (0), then the user loses. If the user has a blackjack (0), then the user wins. If the user_score is over 21, then the user loses. If the computer_score is over 21, then the computer loses. If none of the above, then the player with the highest score wins.
 
 #Hint 14: Ask the user if they want to restart the game. If they answer yes, clear the console and start a new game of blackjack and show the logo from art.py.
+
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+
+# clear console
+def cls():
+    os.system('cls' if os.name=='nt' else 'clear')
+
+game_on = True
+while game_on:
+    cls()
+    #Get first two cards for dealer, only show first one
+    dealer_first_card = random.choice(cards)
+    print(f"The dealer's first card is {dealer_first_card}.")
+    dealer_second_card = random.choice(cards)
+    dealer_score = dealer_first_card + dealer_second_card
+
+    #Get your first two cards, show both
+    user_first_card = random.choice(cards)
+    user_second_card = random.choice(cards)
+    print(f"Your two cards are {user_first_card} and {user_second_card}.")
+    user_cards = [user_first_card, user_second_card]
+    user_score = 0
+
+    #Calculate the sum
+    def calculate_score(cards):
+        temp_score = 0
+        for card in cards:
+            temp_score += card
+        return temp_score
+
+    user_deal_continuing = True
+    while user_deal_continuing:
+        continue_choice = input("Do you want continue drawing cards? 'Yes' or 'No'?")
+        if continue_choice == "Yes":
+            user_cards.append(random.choice(cards))
+            user_score = calculate_score(user_cards)
+            print(f"Your cards are now {user_cards}.")
+            if user_score > 21:
+                print(f"Your score is {user_score} and you lose! \n The dealer's score is {dealer_score}.")
+                user_deal_continuing = False
+        else:
+            user_score = calculate_score(user_cards)
+            user_deal_continuing = False
+
+    if user_score > dealer_score:
+        print(f"Your score is {user_score} and the dealer's score is {dealer_score}. \n You win!")
+    elif user_score == dealer_score:
+        print(f"Your score is {user_score} and the dealer's score is {dealer_score}. \n You tie!")
+    else:
+        print(f"Your score is {user_score} and the dealer's score is {dealer_score}. \n You lose!")
+    game_on = False
+
+            
+
+
 
