@@ -99,13 +99,14 @@ while game_on:
             user_score = calculate_score(user_cards)
             print(f"Your cards are now {user_cards}.")
             if user_score > 21:
-                print(f"Your score is {user_score} and you lose! \n The dealer's score is {dealer_score}.")
                 user_deal_continuing = False
         else:
             user_score = calculate_score(user_cards)
             user_deal_continuing = False
 
-    if user_score > dealer_score:
+    if user_score > 21:
+        print(f"Your score is {user_score} and greater than 21. \n You lose!")        
+    elif user_score > dealer_score:
         print(f"Your score is {user_score} and the dealer's score is {dealer_score}. \n You win!")
     elif user_score == dealer_score:
         print(f"Your score is {user_score} and the dealer's score is {dealer_score}. \n You tie!")
