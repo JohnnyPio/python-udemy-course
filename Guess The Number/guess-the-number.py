@@ -38,7 +38,7 @@ while game_on:
     print(f"You have {number_of_tries} guesses remaining!")
 
     # Initialize first guess
-    user_guess = int(input("Pick a number between 1 and 100."))
+    user_guess = int(input("Pick a number between 1 and 100. \n"))
     number_of_tries -= 1
     print(f"You have {number_of_tries} guesses remaining.")
 
