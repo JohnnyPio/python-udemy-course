@@ -41,6 +41,6 @@ while game_on:
         user_guess = higher_or_lower(user_guess,WIN_NUMBER)
         if user_guess == WIN_NUMBER:
             print(f"{user_guess} is correct, you win!")
-            number_of_tries = 0
             game_on = False
+            break
         number_of_tries -= 1
