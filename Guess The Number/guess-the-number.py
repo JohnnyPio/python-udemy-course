@@ -38,8 +38,7 @@ while game_on:
     print(f"You have {number_of_tries} guesses remaining!")
 
     # Initialize first guess
-    user_guess_str = input(f"Pick a number between 1 and 100. \n")
-    user_guess = int(user_guess_str)
+    user_guess = int(input("Pick a number between 1 and 100."))
     number_of_tries -= 1
     print(f"You have {number_of_tries} guesses remaining.")
 
@@ -52,6 +51,6 @@ while game_on:
             game_on = False
             break
         if number_of_tries == 0:
-            print(f"You ran out of guesses. You lose! \n")
+            print(f"You ran out of guesses. You lose! The correct answer was {WIN_NUMBER} \n")
             game_on = False
             break
