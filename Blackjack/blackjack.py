@@ -1,5 +1,6 @@
 import random
 import os
+import art
 
 ############### Blackjack Project #####################
 
@@ -71,6 +72,7 @@ def cls():
 game_on = True
 while game_on:
     cls()
+    print(art.logo)
     #Get first two cards for dealer, only show first one
     dealer_first_card = random.choice(cards)
     print(f"The dealer's first card is {dealer_first_card}.")
