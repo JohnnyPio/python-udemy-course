@@ -15,13 +15,12 @@ import random
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
 
+cls()
 game_on = True
 while game_on:
-    # cls()
     print(art.logo)
     WIN_NUMBER = random.randint(0,100)
     user_difficulty = input(f"Select a difficulty, 'Easy' or 'Hard'. \n")
-    user_guess = int(input(f"Pick a number between 1 and 100. \n"))
 
     def higher_or_lower(guess,actual_number):
         if guess > actual_number:
@@ -31,16 +30,28 @@ while game_on:
             new_guess = int(input(f"{guess} too low, select a higher number. \n"))
             return new_guess
 
-    number_of_tries = 0
+    # Set difficulty
     if user_difficulty == "Easy":
         number_of_tries = 10
     else:
         number_of_tries = 5
+    print(f"You have {number_of_tries} guesses remaining!")
 
-    while number_of_tries > 0:
+    # Initialize first guess
+    user_guess_str = input(f"Pick a number between 1 and 100. \n")
+    user_guess = int(user_guess_str)
+    number_of_tries -= 1
+    print(f"You have {number_of_tries} guesses remaining.")
+
+    while number_of_tries >= 0:
         user_guess = higher_or_lower(user_guess,WIN_NUMBER)
+        number_of_tries -= 1
+        print(f"You have {number_of_tries} guesses remaining.")
         if user_guess == WIN_NUMBER:
-            print(f"{user_guess} is correct, you win!")
+            print(f"{user_guess} is correct, you win! \n")
             game_on = False
             break
-        number_of_tries -= 1
+        if number_of_tries == 0:
+            print(f"You ran out of guesses. You lose! \n")
+            game_on = False
+            break
