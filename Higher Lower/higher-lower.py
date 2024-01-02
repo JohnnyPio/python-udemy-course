@@ -7,8 +7,6 @@ import game_data
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
 
-
-
 # Print account data
 def format_data(account):
     """Takes the account data and returns the printable format"""
