@@ -1,11 +1,6 @@
-import os
 import random
 import art
 import game_data
-
-# define clear console
-def cls():
-    os.system('cls' if os.name=='nt' else 'clear')
 
 # Print account data
 def format_data(account):
@@ -47,8 +42,9 @@ def game():
         # Follower data
         first_item_followers = first_item["follower_count"]
         second_item_followers = second_item["follower_count"]
-        is_correct = check_answer(choice, first_item_followers, second_item_followers)
 
+        # Check correct answer
+        is_correct = check_answer(choice, first_item_followers, second_item_followers)
         if is_correct:
             score += 1
             print("Correct")
