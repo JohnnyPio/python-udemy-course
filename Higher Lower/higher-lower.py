@@ -7,58 +7,57 @@ import game_data
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
 
-# Initialize new list of remaining samples
-remaining_samples = game_data.data
-# num_of_rems = len(remaining_samples)
-# print(num_of_rems)
+
+
+# Print account data
+def format_data(account):
+    """Takes the account data and returns the printable format"""
+    account_name = account["name"]
+    account_description = account["description"]
+    account_country = account["country"]
+    return f"{account_name}, a {account_description}, from {account_country}"
 
 # Prompt user which of the entries has a higher follower count
-def compare(fir_item,sec_item):
-    global current_score
-    print(f"Compare A: {fir_item['name']}, a {fir_item['description']}, from {fir_item['country']}.")
-    print(art.vs)   
-    print(f"Compare B: {sec_item['name']}, a {sec_item['description']}, from {sec_item['country']}.")
-    choice = input("Who has more followers? Type 'A' or 'B': ")
-    if fir_item['follower_count'] > sec_item['follower_count'] and choice == "A":
-        print("Correct")
-        current_score += 1
-        print(f"Current Score = {current_score}")
-        return fir_item
-    elif fir_item['follower_count'] < sec_item['follower_count'] and choice == "B":
-        print("Correct")
-        current_score += 1
-        print(f"Current Score = {current_score}")
-        return sec_item
+def check_answer(choice,first_item_followers,second_item_followers):
+    """Take the user guess and follower account numbers and return whether it's correct"""
+    if first_item_followers > second_item_followers and choice == "A":
+        return True
+    elif first_item_followers < second_item_followers and choice == "B":
+        return True
     else:
-        print("You lose.")
-        print(f"Final Score = {current_score}")
         return False
 
-# clear console and print logo after each game
-cls()
-print(art.logo)
+def game():
+    print(art.logo)
+    score = 0
+    game_should_continue = True
+    first_item = random.choice(game_data.data)
+    second_item = random.choice(game_data.data)
 
-# Get first random item from data and delete entry
-first_item = random.choice(game_data.data)
-remaining_samples.remove(first_item)
+    while game_should_continue:  
+        first_item = second_item
+        second_item = random.choice(game_data.data)
 
-# Get second entry from data and delete entry
-second_item = random.choice(remaining_samples)
-remaining_samples.remove(second_item)
+        while first_item == second_item:
+            second_item = random.choice(game_data.data)
 
-# (Loop) If right, pull next entry from data and remove from list
-guess_check = True
-while guess_check != False:
-    # Current score
-    current_score = 0
-    
-    # Get initial guess
-    guess_check = compare(first_item,second_item)
+        print(f"Compare A: {format_data(first_item)}")
+        print(art.vs)   
+        print(f"Compare B: {format_data(second_item)}")
+        choice = input("Who has more followers? Type 'A' or 'B': ").upper()
 
-    if guess_check == False:
-        break
-    
-    new_item = random.choice(game_data.data)
-    remaining_samples.remove(new_item)
+        # Follower data
+        first_item_followers = first_item["follower_count"]
+        second_item_followers = second_item["follower_count"]
+        is_correct = check_answer(choice, first_item_followers, second_item_followers)
 
-    guess_check = compare(guess_check, new_item)
+        if is_correct:
+            score += 1
+            print("Correct")
+            print(f"Current Score = {score}")
+        else:
+            game_should_continue = False
+            print("You lose.")
+            print(f"Final Score = {score}")
+
+game()
