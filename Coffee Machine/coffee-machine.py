@@ -85,10 +85,10 @@ while coffee_machine:
     pennies_inserted = int(input("How many pennies?: "))
 
     money_payed = quarters_inserted * 0.25 + dimes_inserted * 0.10 + nickels_inserted * 0.05 + pennies_inserted * 0.01
-    print(f"Total money paid: {money_payed}")
+    print(f"Total money paid: ${money_payed}")
 
 # Check if transaction is successful
-    def transaction_successful(payed,cost):
+    def transaction_successful(payed, cost):
         if payed > cost:
             change = round(payed - cost, 2)
             print(f"Here is ${change} in change.")
@@ -103,7 +103,7 @@ while coffee_machine:
 # Make Coffee
     if transaction_successful(money_payed, MENU[user_choice]["cost"]):
         # Update how much money machine has
-        money_made += money_payed
+        money_made += (money_payed - MENU[user_choice]["cost"])
 
         # TODO FIX Update resources dict
         resources[water_str] = resources[water_str] - MENU[user_choice][ingredients_str][water_str]
