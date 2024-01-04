@@ -16,19 +16,16 @@ while coffee_machine:
         coffee_machine = False
         print("Goodbye coffee...")
         break
-
-    # Print Report
-    if user_choice == "report":
+    elif user_choice == "report":
         print(CoffeeMaker.report(coffee_maker))
-        user_choice = input(f"What coffee would you like? {menu.get_items()}.\n")
+    else:
+        # Find drink in dict
+        selected_drink = menu.find_drink(user_choice)
 
-    # Find drink in dict
-    selected_drink = menu.find_drink(user_choice)
-
-    # Check if resources are sufficient
-    if coffee_maker.is_resource_sufficient(selected_drink):
-        # Check if payment is sufficient
-        if money_made.make_payment(selected_drink.cost):
-            coffee_maker.make_coffee(selected_drink)
-            print(f"The total machine profit = {money_made.profit}")
+        # Check if resources are sufficient
+        if coffee_maker.is_resource_sufficient(selected_drink):
+            # Check if payment is sufficient
+            if money_made.make_payment(selected_drink.cost):
+                coffee_maker.make_coffee(selected_drink)
+                print(f"The total machine profit = {money_made.profit}")
 
