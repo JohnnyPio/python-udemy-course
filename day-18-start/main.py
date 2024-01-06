@@ -1,14 +1,23 @@
-from turtle import Turtle, Screen
+import turtle
+import turtle as t
 
-tim = Turtle()
+
+tim = t.Turtle()
 tim.shape("turtle")
 tim.color("HotPink")
-tim.shapesize(5)
+tim.shapesize(2)
 
 # Draw a Square
-for num in range(4):
-    tim.forward(100)
-    tim.right(90)
+# for _ in range(4):
+#     tim.forward(100)
+#     tim.right(90)
 
-screen = Screen()
+# Draw a Dashed Line
+for _ in range(10):
+    tim.forward(10)
+    tim.penup()
+    tim.forward(10)
+    tim.pendown()
+
+screen = t.Screen()
 screen.exitonclick()
