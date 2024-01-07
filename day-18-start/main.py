@@ -42,7 +42,8 @@ tim.speed(10)
 # Draw a random walk with random colors
 turn_angles = [0, 90, 180, 270]
 for _ in range(200):
-    tim.pencolor(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+    rand_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+    tim.pencolor(rand_color)
     tim.left(random.choice(turn_angles))
     tim.forward(50)
 
