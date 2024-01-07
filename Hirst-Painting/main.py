@@ -4,6 +4,8 @@ import turtle
 
 tim = turtle.Turtle()
 turtle.colormode(255)
+tim.penup()
+tim.hideturtle()
 
 rgb_colors = []
 colors = colorgram.extract('image.jpg', 30)
@@ -29,10 +31,9 @@ for _ in range(10):
     y_change += distance
     for _ in range(10):
         # Dots horizontally
-        tim.penup()
         rand_color = random.choice(rgb_colors)
         tim.dot(distance, rand_color)
-        tim.forward(distance)
+        tim.forward(distance*2.5)
 
 
 screen = turtle.Screen()
