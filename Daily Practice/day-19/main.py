@@ -35,6 +35,7 @@ while is_race_on:
             is_race_on = False
             print(f"The {turtle.fillcolor()} turtle won!")
             if user_bet.lower() == turtle.fillcolor():
+                screen.
                 print("You bet correctly!")
             else:
                 print("You bet incorrectly.")
