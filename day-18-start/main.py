@@ -6,13 +6,13 @@ import random
 tim = t.Turtle()
 tim.shape("turtle")
 tim.color("HotPink")
-tim.shapesize(3)
+tim.shapesize(1)
 #Set the global color mode
 t.colormode(255)
 #Use a thicker line size
-tim.pensize(20)
+tim.pensize(5)
 #Move faster
-tim.speed(10)
+tim.speed(.5)
 
 # Draw a Square
 # for _ in range(4):
@@ -40,12 +40,21 @@ tim.speed(10)
 #         tim.right(360/num)
 
 # Draw a random walk with random colors
-turn_angles = [0, 90, 180, 270]
-for _ in range(200):
+# turn_angles = [0, 90, 180, 270]
+# for _ in range(200):
+#     rand_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+#     tim.pencolor(rand_color)
+#     tim.left(random.choice(turn_angles))
+#     tim.forward(50)
+
+# Make a spirograph
+angle = 0
+for _ in range(90):
     rand_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
     tim.pencolor(rand_color)
-    tim.left(random.choice(turn_angles))
-    tim.forward(50)
+    tim.right(4)
+    tim.circle(100)
+
 
 screen = t.Screen()
 screen.exitonclick()
