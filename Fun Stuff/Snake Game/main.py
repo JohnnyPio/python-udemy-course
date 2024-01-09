@@ -10,29 +10,14 @@ screen.title("My Snake Game")
 # Turtle setup
 turtle.colormode(255)
 
-# Initialize snake parts
-snake_parts = []
+# Initialize snake position
+starting_positions = [(0, 0), (-20, 0), (-40, 0)]
 
-
-segment_1 = Turtle()
-segment_1.penup()
-segment_1.fillcolor("white")
-segment_1.shape("square")
-initial_x = segment_1.xcor()
-initial_y = segment_1.xcor()
-
-segment_2 = Turtle()
-segment_2.penup()
-segment_2.fillcolor("white")
-segment_2.shape("square")
-segment_2.setx(initial_x - 20)
-
-segment_3 = Turtle()
-segment_3.penup()
-segment_3.fillcolor("white")
-segment_3.shape("square")
-segment_3.setx(segment_2.xcor() - 20)
-
+for position in starting_positions:
+    new_segment = Turtle("square")
+    new_segment.penup()
+    new_segment.fillcolor("white")
+    new_segment.goto(position)
 
 
 
