@@ -22,3 +22,5 @@ class Snake:
             prior_segment = self.segments[seg_num - 1]
             self.segments[seg_num].goto(prior_segment.xcor(), prior_segment.ycor())
         self.segments[0].forward(MOVE_DISTANCE)
+
+
