@@ -1,6 +1,8 @@
 import turtle
 from turtle import Screen, Turtle
 from snake import Snake
+from food import Food
+from scoreboard import Scoreboard
 import time
 
 # Screen Setup
@@ -13,7 +15,10 @@ screen.title("My Snake Game")
 turtle.colormode(255)
 turtle.tracer(0)
 
+# Initialize the classes
 snake = Snake()
+food = Food()
+scoreboard = Scoreboard()
 
 screen.listen()
 screen.onkey(snake.up, "Up")
