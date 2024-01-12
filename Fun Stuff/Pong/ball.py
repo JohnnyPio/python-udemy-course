@@ -9,6 +9,7 @@ class Ball(Turtle):
         self.shape("circle")
         self.fillcolor("white")
         self.penup()
+        self.heading()
         self.setheading(225)
 
     def move(self):
