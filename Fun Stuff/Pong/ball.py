@@ -1,6 +1,6 @@
 from turtle import Turtle
 
-MOVE_DISTANCE = 20
+MOVE_DISTANCE = 10
 
 
 class Ball(Turtle):
@@ -11,9 +11,10 @@ class Ball(Turtle):
         self.penup()
         self.heading()
         self.setheading(225)
+        # Consider doing x_move and y_move and using it in move and bounce
 
     def move(self):
         self.forward(MOVE_DISTANCE)
 
-    # def bounce(self):
-    #     self.setheading(45)
+    def bounce(self):
+        self.seth(self.heading() + 90)

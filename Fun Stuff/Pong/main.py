@@ -38,6 +38,12 @@ while game_is_on:
     screen.update()
     ball.move()
 
+    #
+    if ball.ycor() >= 280 or ball.ycor() <= -280:
+        time.sleep(0.01)
+        ball.bounce()
+
+
 
 # Create a class for the ball
 
