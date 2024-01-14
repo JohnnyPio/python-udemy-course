@@ -21,7 +21,6 @@ left_paddle = Paddle((-350, 0))
 right_paddle = Paddle((350, 0))
 ball = Ball()
 
-# Need a way to identify top/bot boundaries so ball will bounce
 # Need a way to identy left/right boundaries so scoring will count
 
 # Listeners for paddles
@@ -30,7 +29,6 @@ screen.onkey(left_paddle.go_up, "Up")
 screen.onkey(left_paddle.go_down, "Down")
 screen.onkey(right_paddle.go_up, "w")
 screen.onkey(right_paddle.go_down, "s")
-# Need a way to bounce ball off paddle
 
 game_is_on = True
 while game_is_on:
@@ -38,14 +36,20 @@ while game_is_on:
     screen.update()
     ball.move()
 
-    #
+    # Bounce off top and bottom wall
     if ball.ycor() >= 280 or ball.ycor() <= -280:
-        time.sleep(0.01)
-        ball.bounce()
+        ball.wall_bounce()
+
+    # Detect collision with right paddle and bounce
+    if ball.distance(right_paddle) < 50 and ball.xcor() > 340:
+        ball.paddle_bounce()
+
+    # Detect collision with left paddle and bounce
+    if ball.distance(left_paddle) < 50 and ball.xcor() < -340:
+        ball.paddle_bounce()
 
 
 
-# Create a class for the ball
 
 # Create a class for the scoreboard
 
