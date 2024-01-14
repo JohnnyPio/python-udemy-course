@@ -9,12 +9,16 @@ class Ball(Turtle):
         self.shape("circle")
         self.fillcolor("white")
         self.penup()
-        self.heading()
-        self.setheading(225)
-        # Consider doing x_move and y_move and using it in move and bounce
+        self.x_move = MOVE_DISTANCE
+        self.y_move = MOVE_DISTANCE
 
     def move(self):
-        self.forward(MOVE_DISTANCE)
+        new_x = self.xcor() + self.x_move
+        new_y = self.ycor() + self.y_move
+        self.goto(new_x, new_y)
 
-    def bounce(self):
-        self.seth(self.heading() + 90)
+    def wall_bounce(self):
+        self.y_move *= -1
+
+    def paddle_bounce(self):
+        self.x_move *= -1
