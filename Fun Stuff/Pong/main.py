@@ -2,6 +2,7 @@ import turtle
 from turtle import Screen, Turtle
 from paddle import Paddle
 from ball import Ball
+from scoreboard import Scoreboard
 import time
 
 # Create the screen, black background
@@ -20,8 +21,7 @@ turtle.tracer(0)
 left_paddle = Paddle((-350, 0))
 right_paddle = Paddle((350, 0))
 ball = Ball()
-
-# Need a way to identy left/right boundaries so scoring will count
+scoreboard = Scoreboard()
 
 # Listeners for paddles
 screen.listen()
@@ -38,19 +38,21 @@ while game_is_on:
 
     # Bounce off top and bottom wall
     if ball.ycor() >= 280 or ball.ycor() <= -280:
-        ball.wall_bounce()
+        ball.bounce_y()
 
-    # Detect collision with right paddle and bounce
-    if ball.distance(right_paddle) < 50 and ball.xcor() > 340:
-        ball.paddle_bounce()
+    # Detect collision with right or left paddle and bounce
+    if (ball.distance(right_paddle) < 50 and ball.xcor() > 340
+            or ball.distance(left_paddle) < 50 and ball.xcor() < -340):
+        ball.bounce_x()
 
-    # Detect collision with left paddle and bounce
-    if ball.distance(left_paddle) < 50 and ball.xcor() < -340:
-        ball.paddle_bounce()
+    # Detect miss with right paddle, increase score
+    if ball.distance(right_paddle) >= 50 and ball.xcor() > 340:
+        scoreboard.increase_left_score()
+        ball.reset_position()
 
-
-
-
-# Create a class for the scoreboard
+    # Detect miss with left paddle, increase score
+    if ball.distance(left_paddle) >= 50 and ball.xcor() < -340:
+        scoreboard.increase_right_score()
+        ball.reset_position()
 
 screen.exitonclick()
