@@ -16,7 +16,7 @@ class Scoreboard(Turtle):
 
     def update_scoreboard(self):
         self.clear()
-        self.write(f"{self.left_paddle_score} to {self.right_paddle_score}", align="left", font=FONT)
+        self.write(f"{self.left_paddle_score} to {self.right_paddle_score}", align="center", font=FONT)
 
     def increase_left_score(self):
         self.left_paddle_score += 1
