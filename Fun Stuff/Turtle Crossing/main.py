@@ -18,7 +18,7 @@ screen.onkey(my_turtle.move, "Up")
 
 game_is_on = True
 while game_is_on:
-    time.sleep(0.1)
+    time.sleep(my_cars.move_speed)
     screen.update()
     my_cars.create_car()
     my_cars.move_cars()
@@ -27,10 +27,11 @@ while game_is_on:
     if my_turtle.ycor() >= FINISH_LINE_Y:
         my_turtle.reset_position()
         scoreboard.increase_level()
+        my_cars.move_speed *= 0.9
 
-    # Collision detection needs work
-    if my_turtle.distance(my_cars) < 20:
-        game_is_on = False
-        print("game over")
+    # Collision detection
+    for car in my_cars.all_cars:
+        if car.distance(my_turtle) < 20:
+            game_is_on = False
 
 screen.exitonclick()
