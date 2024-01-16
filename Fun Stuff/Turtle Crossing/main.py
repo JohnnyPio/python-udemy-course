@@ -33,5 +33,7 @@ while game_is_on:
     for car in my_cars.all_cars:
         if car.distance(my_turtle) < 20:
             game_is_on = False
+            scoreboard.game_over()
+
 
 screen.exitonclick()
