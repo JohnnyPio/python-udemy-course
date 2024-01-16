@@ -31,5 +31,5 @@ class CarManager(Turtle):
 
 
 
-    # def next_level_faster(self):
-    #     STARTING_MOVE_DISTANCE = STARTING_MOVE_DISTANCE + MOVE_INCREMENT
+    def next_level_faster(self):
+        STARTING_MOVE_DISTANCE = STARTING_MOVE_DISTANCE + MOVE_INCREMENT
