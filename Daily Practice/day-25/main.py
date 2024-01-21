@@ -31,10 +31,27 @@ import pandas
 # print(max_temp_f)
 
 # Create a dict from scratch
+# data_dict = {
+#     "students": ["Amy", "James", "Angela"],
+#     "scores": [76, 56, 65]
+# }
+#
+# data = pandas.DataFrame(data_dict)
+# data.to_csv("new_data.csv")
+
+data = pandas.read_csv("2018_squirrel.csv")
+# squirrel_color = data["Primary Fur Color"]
+grey_squirrel_count = len(data[data["Primary Fur Color"] == "Gray"])
+red_squirrel_count = len(data[data["Primary Fur Color"] == "Cinnamon"])
+black_squirrel_count = len(data[data["Primary Fur Color"] == "Black"])
+# print(grey_squirrel_count)
+# print(red_squirrel_count)
+# print(black_squirrel_count)
+
 data_dict = {
-    "students": ["Amy", "James", "Angela"],
-    "scores": [76, 56, 65]
+    "Fur Color": ["Gray", "Cinnamon", "Black"],
+    "Count": [grey_squirrel_count, red_squirrel_count, black_squirrel_count]
 }
 
-data = pandas.DataFrame(data_dict)
-data.to_csv("new_data.csv")
+df = pandas.DataFrame(data_dict)
+df.to_csv("squirrel count.csv")
