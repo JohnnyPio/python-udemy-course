@@ -1,3 +1,4 @@
+import csv
 import turtle
 import pandas
 
@@ -29,4 +30,10 @@ while num_states_guessed < 50:
         states_left.remove(answer_state)
         num_states_guessed += 1
 
-turtle.mainloop()
+    if answer_state == "Exit":
+        break
+
+file_title = "states_to_learn.csv"
+new_data = pandas.DataFrame(states_left)
+new_data.to_csv(file_title)
+
