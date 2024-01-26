@@ -36,16 +36,16 @@ def start_timer():
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 def count_down(count):
-    clock_mins = floor(count / 60)
-    clock_secs = count % 60
+    clock_min = floor(count / 60)
+    count_sec = count % 60
 
-    if 0 <= clock_secs < 10:
-        clock_secs = f"0{clock_secs}"
+    if 0 <= count_sec < 10:
+        count_sec = f"0{count_sec}"
 
-    if 0 <= clock_mins < 10:
-        clock_mins = f"0{clock_mins}"
+    if 0 <= clock_min < 10:
+        clock_min = f"0{clock_min}"
 
-    canvas.itemconfig(timer_text, text=f"{clock_mins}:{clock_secs}")
+    canvas.itemconfig(timer_text, text=f"{clock_min}:{count_sec}")
     if count > 0:
         window.after(1000, count_down, count - 1)
     else:
