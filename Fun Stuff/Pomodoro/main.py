@@ -47,9 +47,14 @@ def count_down(count):
 
     canvas.itemconfig(timer_text, text=f"{clock_min}:{count_sec}")
     if count > 0:
-        window.after(1000, count_down, count - 1)
+        window.after(1, count_down, count - 1)
     else:
         start_timer()
+        marks = ""
+        work_sessions = floor(reps/2)
+        for _ in range(work_sessions):
+            marks += CHECKMARK
+        checkbox_label.config(text=marks)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -76,7 +81,7 @@ reset_button = Button(text="Reset")
 reset_button.grid(row=2, column=2)
 
 # Checkbox
-checkbox_label = Label(text=CHECKMARK, fg=GREEN, bg=YELLOW)
+checkbox_label = Label(fg=GREEN, bg=YELLOW)
 checkbox_label.grid(row=4, column=1)
 
 # Reps
