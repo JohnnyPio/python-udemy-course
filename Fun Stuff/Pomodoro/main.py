@@ -11,9 +11,18 @@ WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 CHECKMARK = "✔"
+my_timer = None
 
 
 # ---------------------------- TIMER RESET ------------------------------- #
+def reset_timer():
+    window.after_cancel(str(my_timer))
+    canvas.itemconfig(timer_text, text="00:00")
+    title_label.config(text="Timer", fg=GREEN)
+    checkbox_label.config(text="")
+    global reps
+    reps = 0
+
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 def start_timer():
@@ -47,7 +56,8 @@ def count_down(count):
 
     canvas.itemconfig(timer_text, text=f"{clock_min}:{count_sec}")
     if count > 0:
-        window.after(1, count_down, count - 1)
+        global my_timer
+        my_timer = window.after(1000, count_down, count - 1)
     else:
         start_timer()
         marks = ""
@@ -77,7 +87,7 @@ title_label.grid(row=0, column=1)
 start_button = Button(text="Start", command=start_timer)
 start_button.grid(row=2, column=0)
 
-reset_button = Button(text="Reset")
+reset_button = Button(text="Reset", command=reset_timer)
 reset_button.grid(row=2, column=2)
 
 # Checkbox
