@@ -40,19 +40,26 @@ def add_to_file():
     new_data = {website: {
         "email": email,
         "password": password,
-        }
+    }
     }
 
     if website == "" or email == "" or password == "":
         messagebox.showerror(title="Error", message="Please don't leave any fields empty!")
     else:
-        with open("data.json", "r") as file:
-            updated_data = json.load(file)
+        try:
+            with open("data.json", "r") as file:
+                # Read old data
+                updated_data = json.load(file)
+        except FileNotFoundError:
+            with open("data.json", "w") as file:
+                json.dump(new_data, file, indent=4)
+        else:
+            # Update old data
             updated_data.update(new_data)
 
-        with open("data.json", "w") as file:
-            json.dump(updated_data, file, indent=4)
-
+            with open("data.json", "w") as file:
+                json.dump(updated_data, file, indent=4)
+        finally:
             website_input.delete(0, END)
             password_input.delete(0, END)
 
