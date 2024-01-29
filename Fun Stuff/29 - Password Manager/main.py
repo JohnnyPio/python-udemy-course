@@ -64,6 +64,30 @@ def add_to_file():
             password_input.delete(0, END)
 
 
+# ---------------------------- SEARCH FILE ---------------------------- #
+def search_file():
+    try:
+        with open("data.json", "r") as file:
+            # Read old data
+            updated_data = json.load(file)
+    except FileNotFoundError:
+        messagebox.showerror(title="Error", message="No File Found!")
+    else:
+        find_password(updated_data)
+
+
+# Find Password as separate method
+def find_password(data):
+    try:
+        website = website_input.get()
+        website_dict = data[website]
+    except KeyError:
+        messagebox.showerror(title="Error", message="No Website Found!")
+    else:
+        messagebox.showinfo(title=website, message=f"Email: {website_dict.get('email')}\n"
+                                                   f"Password: {website_dict.get('password')}")
+
+
 # ---------------------------- UI SETUP ------------------------------- #
 # Window setup
 window = Tk()
@@ -82,8 +106,11 @@ website_label = Label(text="Website:")
 website_label.grid(row=website_row, column=0)
 
 website_input = Entry(width=35)
-website_input.grid(row=website_row, column=1, columnspan=2, sticky="EW")
+website_input.grid(row=website_row, column=1, sticky="EW")
 website_input.focus()
+
+search_button = Button(text="Search", command=search_file)
+search_button.grid(row=website_row, column=2, sticky="EW")
 
 # Email/Username Line
 email_username_row = website_row + 1
