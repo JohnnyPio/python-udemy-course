@@ -7,11 +7,16 @@ import pandas
 BACKGROUND_COLOR = "#B1DDC6"
 LEARNING_LANGUAGE = "French"
 NATIVE_LANGUAGE = "English"
-
-imported_data = pandas.read_csv("data/french_words.csv")
-to_learn = imported_data.to_dict(orient="records")
-learned = []
+to_learn = {}
 current_card = {}
+
+try:
+    imported_data = pandas.read_csv("data/words_to_learn.csv")
+except FileNotFoundError:
+    original_data = pandas.read_csv("data/french_words.csv")
+    to_learn = original_data.to_dict(orient="records")
+else:
+    to_learn = imported_data.to_dict(orient="records")
 
 
 # ---------------------------- PICK WORDS ------------------------------ #
@@ -33,12 +38,10 @@ def flip_card():
     canvas.itemconfig(card_word, text=current_card[NATIVE_LANGUAGE], fill="white")
 
 
-def remove_card():
-    global current_card
+def is_known():
     to_learn.remove(current_card)
-    learned.append(current_card)
-    learned_df = pandas.DataFrame(learned)
-    learned_df.to_csv("words_to_learn.csv", index=False)
+    to_learn_df = pandas.DataFrame(to_learn)
+    to_learn_df.to_csv("data/words_to_learn.csv", index=False)
     get_next_card()
 
 
@@ -66,9 +69,9 @@ wrong_image = PhotoImage(file="images/wrong.png")
 wrong_button = Button(image=wrong_image, highlightthickness=0, bg=BACKGROUND_COLOR, command=get_next_card)
 wrong_button.grid(row=button_row, column=0, sticky="EW")
 
-right_image = PhotoImage(file="images/right.png")
-right_button = Button(image=right_image, highlightthickness=0, bg=BACKGROUND_COLOR, command=remove_card)
-right_button.grid(row=button_row, column=1, sticky="EW")
+correct_image = PhotoImage(file="images/right.png")
+correct_button = Button(image=correct_image, highlightthickness=0, bg=BACKGROUND_COLOR, command=is_known)
+correct_button.grid(row=button_row, column=1, sticky="EW")
 
 # Initialize cards
 get_next_card()
