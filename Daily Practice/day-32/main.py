@@ -11,4 +11,11 @@
 #                         msg="Subject: John's Python Course! \n\n Hi, this is me sending you an email from Python :)"
 #                         )
 
-import datetime
+import datetime as dt
+
+now = dt.datetime.now()
+day_of_week = now.weekday()
+print(day_of_week)
+
+date_of_birth = dt.datetime(year=1990, month=7, day=23, hour=19)
+print(date_of_birth)
