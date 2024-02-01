@@ -24,7 +24,7 @@ this_day = now.date().day
 # 2. Check if today matches a birthday in the birthdays.csv
 birthday_person = birthdays[(birthdays["month"] == this_month) & (birthdays["day"] == this_day)]
 
-# 3. If step 2 is true, pick a random letter from letter templates and replace the [NAME] with the person's actual name from birthdays.csv
+# 3. If step 2 is true, pick a random letter from letter templates and replace the [NAME] with the person's actual name
 if not birthday_person.empty:
     birthday_name = str(birthday_person.get("name").item())
     random_letter_template = random.choice(letter_templates)
@@ -33,8 +33,6 @@ if not birthday_person.empty:
         file_data = file.read()
         file_data = file_data.replace("[NAME]", birthday_name)
         file_data = file_data.replace("Angela", "John")
-        email_body = file_data
-        print(email_body)
 
     # 4. Send the letter generated in step 3 to that person's email address.
     with smtplib.SMTP("smtp.gmail.com") as connection:
@@ -43,5 +41,5 @@ if not birthday_person.empty:
         connection.sendmail(
             from_addr=my_email,
             to_addrs=my_email,
-            msg=f"Subject: Happy Birthday {birthday_name}! \n\n {email_body}".encode("utf8")
+            msg=f"Subject: Happy Birthday {birthday_name}! \n\n {file_data}".encode("utf8")
         )
