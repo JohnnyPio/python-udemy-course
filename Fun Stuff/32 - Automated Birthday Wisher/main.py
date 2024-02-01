@@ -31,8 +31,8 @@ if not birthday_person.empty:
     path = letter_temp_dir + random_letter_template
     with open(path, "r", encoding="utf8") as file:
         file_data = file.read()
-        file_data.replace("[NAME]", "test")
-        file_data.replace("Angela", "John")
+        file_data = file_data.replace("[NAME]", birthday_name)
+        file_data = file_data.replace("Angela", "John")
         email_body = file_data
         print(email_body)
 
