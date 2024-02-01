@@ -13,6 +13,10 @@ letter_temp_dir = "./letter_templates/"
 letter_templates = os.listdir(letter_temp_dir)
 email_body = ""
 
+my_email = "john.s.piotrowski@gmail.com"
+password = "mgqw gtcc fame vnjd"
+to_email = "Kristinlewis2012@gmail.com"
+
 # Current month and day
 this_month = now.date().month
 this_day = now.date().day
@@ -25,12 +29,19 @@ if not birthday_person.empty:
     birthday_name = str(birthday_person.get("name").item())
     random_letter_template = random.choice(letter_templates)
     path = letter_temp_dir + random_letter_template
-    with open(path, "r") as file:
+    with open(path, "r", encoding="utf8") as file:
         file_data = file.read()
-        file_data.replace("[NAME]", "testy")
+        file_data.replace("[NAME]", "test")
         file_data.replace("Angela", "John")
         email_body = file_data
+        print(email_body)
 
-print(email_body)
-
-# 4. Send the letter generated in step 3 to that person's email address.
+    # 4. Send the letter generated in step 3 to that person's email address.
+    with smtplib.SMTP("smtp.gmail.com") as connection:
+        connection.starttls()
+        connection.login(user=my_email, password=password)
+        connection.sendmail(
+            from_addr=my_email,
+            to_addrs=my_email,
+            msg=f"Subject: Happy Birthday {birthday_name}! \n\n {email_body}".encode("utf8")
+        )
