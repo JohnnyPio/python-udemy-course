@@ -1,5 +1,8 @@
+import smtplib
 import requests
-from datetime import datetime
+import datetime as dt
+import time
+import sched
 
 MY_LAT = 40.645270
 MY_LONG = -73.981180
@@ -33,12 +36,37 @@ data = response.json()
 sunrise = int(data["results"]["sunrise"].split("T")[1].split(":")[0])
 sunset = int(data["results"]["sunset"].split("T")[1].split(":")[0])
 
-time_now = datetime.now()
+time_now = dt.datetime.now()
+hour_now = time_now.hour
 print(sunrise)
 print(sunset)
-print(time_now)
+print(hour_now)
+
+
+def is_night():
+    if hour_now > sunset or hour_now < sunrise:
+        return True
+
 
 # If the ISS is close to my current position
 # and it is currently dark
 # Then send me an email to tell me to look up.
+def notify_me():
+    if iss_nearby() and is_night():
+        email = "john.s.piotrowski@gmail.com"
+        password = "mgqw gtcc fame vnjd"
+
+        with smtplib.SMTP("smtp.gmail.com") as connection:
+            connection.starttls()
+            connection.login(user=email, password=password)
+            connection.sendmail(
+                from_addr=email,
+                to_addrs=email,
+                msg=f"Subject: ISS Overhead, Look Up!! \n\n The ISS is overhead!"
+            )
+
+
 # BONUS: run the code every 60 seconds.
+my_scheduler = sched.scheduler(time.time, time.sleep)
+my_scheduler.enter(60, 1, notify_me)
+my_scheduler.run()
