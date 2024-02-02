@@ -1,14 +1,12 @@
 from question_model import Question
 from data import question_data
 from quiz_brain import QuizBrain
+import html
 
 question_bank = []
 for question in question_data:
     question_text = question["question"]
-    if question_text.find("&#039;"):
-        question_text = question_text.replace("&#039;", "'")
-    if question_text.find("&quot;"):
-        question_text = question_text.replace("&quot;", "'")
+    question_text = html.unescape(question_text)
     question_answer = question["correct_answer"]
     new_question = Question(question_text, question_answer)
     question_bank.append(new_question)
