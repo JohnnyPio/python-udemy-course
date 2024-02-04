@@ -1,8 +1,28 @@
+import os
+
+import pandas
+import requests
+
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
+STOCK_API_KEY = os.environ.get("STOCK_API_KEY")
+
+url = "https://www.alphavantage.co/query"
+stock_params = {
+    "function": "TIME_SERIES_DAILY",
+    "symbol": "TSLA",
+    "apikey": STOCK_API_KEY
+}
+
+response = requests.get(url, params=stock_params)
+stock_data = response.json()
 
 ## STEP 1: Use https://www.alphavantage.co
 # When STOCK price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
+historical_data = stock_data.get("Time Series (Daily)")
+data_df = pandas.DataFrame.from_dict(historical_data)
+print(data_df)
+
 
 ## STEP 2: Use https://newsapi.org
 # Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME. 
