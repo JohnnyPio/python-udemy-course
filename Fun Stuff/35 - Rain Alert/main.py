@@ -1,6 +1,7 @@
 import requests
+import os
 
-API_KEY = "2ecab42cfaf25fd97f8fe4d2acba44cf"
+API_KEY = os.environ.get("OWM_API_KEY")
 WEATHER_ENDPOINT = "https://api.openweathermap.org/data/2.5/forecast"
 
 weather_params = {
