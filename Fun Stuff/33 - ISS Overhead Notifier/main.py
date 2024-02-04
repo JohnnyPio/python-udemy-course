@@ -54,7 +54,7 @@ def is_night():
 def notify_me():
     if iss_nearby() and is_night():
         email = "john.s.piotrowski@gmail.com"
-        password = "mgqw gtcc fame vnjd"
+        password = os.environ.get("AUTO_EMAIL")
 
         with smtplib.SMTP("smtp.gmail.com") as connection:
             connection.starttls()

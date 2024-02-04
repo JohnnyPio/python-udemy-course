@@ -14,7 +14,7 @@ letter_templates = os.listdir(letter_temp_dir)
 email_body = ""
 
 my_email = "john.s.piotrowski@gmail.com"
-password = "mgqw gtcc fame vnjd"
+password = os.environ.get("AUTO_EMAIL")
 to_email = "Kristinlewis2012@gmail.com"
 
 # Current month and day
