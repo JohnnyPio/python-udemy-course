@@ -4,30 +4,31 @@ import pandas
 import requests
 
 STOCK = "TSLA"
-COMPANY_NAME = "Tesla Inc"
+COMPANY_NAME = "Tesla"
 STOCK_API_KEY = os.environ.get("STOCK_API_KEY")
 NEWS_API_KEY = os.environ.get("NEWS_API_KEY")
-
 
 stock_url = "https://www.alphavantage.co/query"
 stock_params = {
     "function": "TIME_SERIES_DAILY",
-    "symbol": "TSLA",
+    "symbol": STOCK,
     "apikey": STOCK_API_KEY
 }
 
 news_url = "https://newsapi.org/v2/top-headlines"
 news_params = {
     "apiKey": NEWS_API_KEY,
-    "q": "IBM",
+    "q": COMPANY_NAME
 }
 
 ## STEP 1: Use https://www.alphavantage.co
 # When STOCK price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
-response = requests.get("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=demo").json()
+response = requests.get(stock_url, stock_params).json()
 historical_data = response.get("Time Series (Daily)")
-first_key = next(iter(historical_data))
-most_recent_close = float(historical_data.get(first_key).get("4. close"))
+current_key = next(iter(historical_data))
+keys = list(historical_data.keys())
+current_index = keys.index(current_key)
+most_recent_close = float(historical_data.get(current_key).get("4. close"))
 for key in historical_data:
     current_day_open = float(historical_data.get(key).get("1. open"))
     if abs(current_day_open - most_recent_close) / most_recent_close >= 0.05:
@@ -35,12 +36,12 @@ for key in historical_data:
         # Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME.
         news_response = requests.get(news_url, news_params)
         news = news_response.json().get("articles")
-        for new in news:
+        for new in news[:2]:
             title = new.get("title")
-            print(title)
+            print(str(current_key) + " " + title)
+    current_key = keys[current_index + 1]
     current_day_close = float(historical_data.get(key).get("4. close"))
     most_recent_close = current_day_close
-
 
 ## STEP 3: Use https://www.twilio.com
 # Send a seperate message with the percentage change and each article's title and description to your phone number. 
