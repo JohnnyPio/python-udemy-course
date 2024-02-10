@@ -39,12 +39,21 @@ headers = {
 pixel_creation_endpoint = f"{pixela_endpoint}/{USERNAME}/graphs/{GRAPH_ID}"
 
 today = datetime.now()
+TODAY = today.strftime("%Y%m%d")
 
 pixel_params = {
-    "date": today.strftime("%Y%m%d"),
-    "quantity": "0",
+    "date": TODAY,
+    "quantity": "3",
 }
 
 # response = requests.post(url=pixel_creation_endpoint, json=pixel_params, headers=headers)
 # print(response.text)
 
+pixel_put_endpoint = f"{pixela_endpoint}/{USERNAME}/graphs/{GRAPH_ID}/{TODAY}"
+
+put_params = {
+    "quantity": "3",
+}
+
+response = requests.put(url=pixel_put_endpoint, json=put_params, headers=headers)
+print(response.text)
