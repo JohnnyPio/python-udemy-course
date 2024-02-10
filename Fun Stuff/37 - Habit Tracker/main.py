@@ -1,5 +1,6 @@
 import requests
 import os
+from datetime import datetime
 
 USERNAME = "jspiotrowski"
 TOKEN = os.environ.get("PIXELA_TOKEN")
@@ -37,12 +38,13 @@ headers = {
 # Posting some data
 pixel_creation_endpoint = f"{pixela_endpoint}/{USERNAME}/graphs/{GRAPH_ID}"
 
+today = datetime.now()
+
 pixel_params = {
-    "date": "20240209",
-    "quantity": "1",
+    "date": today.strftime("%Y%m%d"),
+    "quantity": "0",
 }
 
-response = requests.post(url=pixel_creation_endpoint, json=pixel_params, headers=headers)
-print(response.text)
-
+# response = requests.post(url=pixel_creation_endpoint, json=pixel_params, headers=headers)
+# print(response.text)
 
