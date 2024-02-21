@@ -14,20 +14,30 @@ driver.get("https://www.python.org/")
 # price_cents = driver.find_element(By.CLASS_NAME, "a-price-fraction").text
 # print(f"The price is: {price_dollar}.{price_cents}")
 
-# By Name
-search_bar = driver.find_element(By.NAME, value="q")
-print(search_bar.get_attribute("placeholder"))
+# # By Name
+# search_bar = driver.find_element(By.NAME, value="q")
+# print(search_bar.get_attribute("placeholder"))
+#
+# # By ID
+# go_button = driver.find_element(By.ID, value="submit")
+# print(go_button.size)
+#
+# # By CSS
+# docs_link = driver.find_element(By.CSS_SELECTOR, value=".documentation-widget a")
+# print(docs_link.text)
+#
+# # By XPATH :)
+# submit_button = driver.find_element(By.XPATH, value='//*[@id="site-map"]/div[2]/div/ul/li[3]/a')
+# print(submit_button.text)
 
-# By ID
-go_button = driver.find_element(By.ID, value="submit")
-print(go_button.size)
+# Multiple elements
+sel_obj_event_times = driver.find_elements(By.CSS_SELECTOR, value=".event-widget li time")
+event_times = [time.text for time in sel_obj_event_times]
 
-# By CSS
-docs_link = driver.find_element(By.CSS_SELECTOR, value=".documentation-widget a")
-print(docs_link.text)
+sel_obj_events = driver.find_elements(By.CSS_SELECTOR, value=".event-widget li a")
+events = [event.text for event in sel_obj_events]
 
-# By XPATH :)
-submit_button = driver.find_element(By.XPATH, value='//*[@id="site-map"]/div[2]/div/ul/li[3]/a')
-print(submit_button.text)
+events_dict = dict(zip(event_times, events))
+print(events_dict)
 
 driver.quit()
