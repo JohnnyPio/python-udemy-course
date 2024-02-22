@@ -13,6 +13,7 @@ driver.get("https://orteil.dashnet.org/experiments/cookie/")
 
 cookie_button = driver.find_element(By.ID, value="cookie")
 
+
 # Method + cleanup
 
 
@@ -25,26 +26,29 @@ def get_prices(options):
     return final_prices
 
 
-current_time = time.time()
+start_time = time.time()
 timeout = 5
-end_game = 15
+end_game = 20
 game_is_on = True
 while game_is_on:
+    current_time = start_time
     time.sleep(0.05)
     cookie_button.click()
+
+    if time.time() >= start_time + end_game:
+        game_is_on = False
+        print(driver.find_element(By.ID, value="cps").text)
+        break
+
     if time.time() >= current_time + timeout:
         money_amount = int(driver.find_element(By.ID, value="money").text)
         all_buying_options_container = driver.find_element(By.CSS_SELECTOR, value="#store")
         all_options = all_buying_options_container.find_elements(By.TAG_NAME, value="b")
 
         prices_as_ints = get_prices(all_options)
-        index_to_buy = prices_as_ints.index([item for item in prices_as_ints if item < money_amount][-1])
+        last_index = [item for item in prices_as_ints if item < money_amount][-1]
+        index_to_buy = prices_as_ints.index(last_index)
         all_options[index_to_buy].click()
         current_time = time.time()
-
-    if time.time() >= current_time + end_game:
-        game_is_on = False
-        print(driver.find_element(By.ID, value="cps").text)
-        break
 
 driver.quit()
