@@ -29,5 +29,14 @@ pw_inputpanel.send_keys(password)
 local_signin_button = driver.find_element(By.XPATH, value='//*[@id="organic-div"]/form/div[3]/button')
 local_signin_button.click()
 
+driver.get("https://www.linkedin.com/in/johnpiotrowski/")
+
+# TODO - Figure out getting to connections
+# connections_buttons = driver.find_elements(By.CSS_SELECTOR, value="a.ember-view")
+# names = [item.text for item in connections_buttons]
+# print(connections_buttons)
+# the_button = connections_buttons[3]
+# the_button.click()
+
 
 # driver.quit()
