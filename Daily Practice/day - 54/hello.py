@@ -23,12 +23,14 @@ def make_bold(function):
 def make_underlined(function):
     def wrapper():
         return "<u>" + function() + "</u>"
+
     return wrapper
 
 
 def make_emphasis(function):
     def wrapper():
-        return "<i>" + function() + "</i>"
+        return "<em>" + function() + "</em>"
+
     return wrapper
 
 
@@ -40,9 +42,6 @@ def make_emphasis(function):
 def say_bye():
     return "Bye"
 
-
-# @make_emphasis
-# @make_underlined
 
 # Creating variable paths and converting the path
 @app.route("/<name>/1")
