@@ -13,11 +13,36 @@ def hello_world():
             'v1.Y2lkPTc5MGI3NjExNWw4dmdyZGk5ZTBqYjF2MGx0bm1jNzJ4NG9oa3RhM3h6NWlwajR2cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UB9x43ZH3105v70743/giphy.gif">')
 
 
+def make_bold(function):
+    def wrapper():
+        return "<b>" + function() + "</b>"
+
+    return wrapper
+
+
+def make_underlined(function):
+    def wrapper():
+        return "<u>" + function() + "</u>"
+    return wrapper
+
+
+def make_emphasis(function):
+    def wrapper():
+        return "<i>" + function() + "</i>"
+    return wrapper
+
+
 # Different routes using the app.route decorator
 @app.route("/bye")
+@make_bold
+@make_underlined
+@make_emphasis
 def say_bye():
     return "Bye"
 
+
+# @make_emphasis
+# @make_underlined
 
 # Creating variable paths and converting the path
 @app.route("/<name>/1")
