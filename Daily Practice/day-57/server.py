@@ -11,9 +11,8 @@ current_year = datetime.date.today().year
 
 @app.route("/")
 def home():
-    return "Hello world"
-    # rand_num = random.randint(1, 10)
-    # return render_template("index.html", my_rand_num=rand_num, MY_NAME=my_name, CURRENT_YEAR=current_year)
+    rand_num = random.randint(1, 10)
+    return render_template("index.html", my_rand_num=rand_num, MY_NAME=my_name, CURRENT_YEAR=current_year)
 
 
 def get_gender(your_name):
@@ -35,8 +34,8 @@ def guessing(name):
     return render_template("index.html", YOUR_NAME=name, YOUR_GENDER=your_gender, YOUR_AGE=your_age)
 
 
-@app.route("/blog")
-def blog():
+@app.route("/blog/<num>")
+def get_blog(num):
     blog_url = "https://api.npoint.io/c790b4d5cab58020d391"
     response = requests.get(blog_url)
     all_posts = response.json()
