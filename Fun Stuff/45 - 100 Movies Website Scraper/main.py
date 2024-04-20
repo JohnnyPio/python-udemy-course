@@ -1,3 +1,5 @@
+import random
+
 from bs4 import BeautifulSoup
 import requests
 
@@ -13,4 +15,11 @@ all_title_raw_text.reverse()
 
 with open("movies.txt", "wt", encoding="utf-8") as file:
     for item in all_title_raw_text:
-        file.write(item+'\n')
+        file.write(item + '\n')
+
+all_movies = []
+with open("movies.txt", "r", encoding="utf-8") as file:
+    for item in file:
+        all_movies.append(item)
+
+print(random.choice(all_movies))
